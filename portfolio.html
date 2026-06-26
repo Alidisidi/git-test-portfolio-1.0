@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alidis IDI ISSILAMOU — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0c;
+    --bg2: #111115;
+    --bg3: #18181e;
+    --accent: #00e5c8;
+    --accent2: #7b5cfa;
+    --text: #f0f0f5;
+    --muted: #6b6b80;
+    --border: rgba(255,255,255,0.07);
+    --font-display: 'Syne', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--accent); color: #000; }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(10,10,12,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -4px; left: 0; right: 0; height: 1px;
+    background: var(--accent); transform: scaleX(0); transition: transform 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 6rem 3rem; max-width: 1100px; margin: 0 auto; }
+
+  /* ─── HERO ─── */
+  #accueil {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding-top: 8rem; padding-bottom: 4rem;
+    position: relative;
+  }
+
+  .hero-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 2rem; height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+  .hero-name .line2 { color: transparent; -webkit-text-stroke: 1px rgba(240,240,245,0.3); }
+  .hero-name .accent-word { color: var(--accent); }
+
+  .hero-desc {
+    max-width: 480px;
+    font-size: 1rem;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 3rem;
+    line-height: 1.8;
+  }
+
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    background: var(--accent);
+    color: #000;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { background: #fff; transform: translateY(-2px); }
+
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.3rem;
+  }
+
+  /* ─── BG DECOR ─── */
+  .hero-grid {
+    position: fixed; inset: 0; z-index: -1;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 30%, transparent 80%);
+  }
+  .hero-glow {
+    position: fixed; top: -200px; left: -200px; width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,229,200,0.06) 0%, transparent 65%);
+    z-index: -1; pointer-events: none;
+  }
+
+  /* ─── SECTION TITLES ─── */
+  .section-header { margin-bottom: 3.5rem; }
+  .section-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  /* ─── PROFIL ─── */
+  .profil-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .profil-text p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.9;
+    margin-bottom: 1rem;
+  }
+
+  .profil-highlight {
+    padding: 1.5rem;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 2px;
+    margin-top: 1.5rem;
+  }
+  .profil-highlight p {
+    color: var(--text);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  .profil-info { display: flex; flex-direction: column; gap: 1rem; }
+  .info-row {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    transition: border-color 0.2s;
+  }
+  .info-row:hover { border-color: rgba(0,229,200,0.3); }
+  .info-icon {
+    font-size: 1.2rem; margin-top: 2px; flex-shrink: 0;
+  }
+  .info-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.2rem;
+  }
+  .info-value { font-size: 0.9rem; color: var(--text); }
+
+  /* ─── PARCOURS ─── */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0; width: 1px;
+    background: var(--border);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    padding-left: 1.5rem;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute; left: -2rem; top: 0.35rem;
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+    transform: translateX(-3px);
+  }
+
+  .timeline-date {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+  .timeline-role {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+  .timeline-org {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
+  }
+  .timeline-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .timeline-tabs {
+    display: flex; gap: 0.5rem; margin-bottom: 2.5rem;
+  }
+  .tab-btn {
+    padding: 0.5rem 1.25rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .tab-btn.active { background: var(--accent); border-color: var(--accent); color: #000; }
+  .tab-btn:hover:not(.active) { border-color: var(--accent); color: var(--accent); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ─── COMPÉTENCES ─── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    transition: all 0.25s;
+  }
+  .skill-card:hover {
+    border-color: rgba(0,229,200,0.3);
+    transform: translateY(-4px);
+    background: var(--bg3);
+  }
+
+  .skill-card-title {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    font-size: 0.78rem;
+    color: var(--text);
+    font-family: var(--font-mono);
+    transition: all 0.15s;
+  }
+  .skill-tag:hover { border-color: var(--accent); color: var(--accent); }
+  .skill-tag.learning { border-color: rgba(123,92,250,0.4); color: var(--accent2); }
+
+  /* ─── CERTIFICATIONS ─── */
+  .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .cert-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    display: flex; flex-direction: column; gap: 1rem;
+    transition: all 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .cert-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+  .cert-card:hover { border-color: rgba(0,229,200,0.3); transform: translateY(-4px); }
+  .cert-org {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .cert-name {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  .cert-year {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .cert-link {
+    margin-top: auto;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 0.4rem;
+    transition: gap 0.2s;
+  }
+  .cert-link:hover { gap: 0.7rem; }
+
+  /* ─── PROJETS ─── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.25s;
+    display: flex; flex-direction: column;
+  }
+  .project-card:hover { border-color: rgba(0,229,200,0.3); transform: translateY(-4px); }
+
+  .project-img {
+    width: 100%; aspect-ratio: 16/9;
+    background: var(--bg3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .project-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+
+  .project-type {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  .project-name {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+  .project-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+    flex: 1;
+  }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .stack-chip {
+    padding: 0.2rem 0.6rem;
+    background: rgba(0,229,200,0.07);
+    border: 1px solid rgba(0,229,200,0.2);
+    border-radius: 2px;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--accent);
+  }
+
+  /* ─── CONTACT ─── */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .contact-info { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .contact-item:hover { border-color: rgba(0,229,200,0.3); transform: translateX(4px); }
+  .contact-icon { font-size: 1.2rem; }
+  .contact-text { font-size: 0.88rem; color: var(--text); }
+  .contact-sub { font-family: var(--font-mono); font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+  .form-group label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .form-group input,
+  .form-group textarea {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: vertical;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus { border-color: var(--accent); }
+  .form-group textarea { min-height: 120px; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .footer-copy {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+  }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--accent); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; } 50% { opacity: 0; }
+  }
+  .cursor {
+    display: inline-block;
+    width: 3px; height: 0.8em;
+    background: var(--accent);
+    margin-left: 4px;
+    vertical-align: middle;
+    animation: blink 1s infinite;
+  }
+
+  .fade-in { animation: fadeInUp 0.7s ease forwards; }
+  .delay-1 { animation-delay: 0.1s; opacity: 0; }
+  .delay-2 { animation-delay: 0.25s; opacity: 0; }
+  .delay-3 { animation-delay: 0.4s; opacity: 0; }
+  .delay-4 { animation-delay: 0.55s; opacity: 0; }
+  .delay-5 { animation-delay: 0.7s; opacity: 0; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .profil-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .hero-stats { gap: 2rem; flex-wrap: wrap; }
+  }
+
+  /* Project visual placeholders */
+  .proj-placeholder {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .p1 { background: linear-gradient(135deg, #0f1a2e 0%, #0a2040 100%); color: rgba(0,229,200,0.4); }
+  .p2 { background: linear-gradient(135deg, #1a0f2e 0%, #200a40 100%); color: rgba(123,92,250,0.4); }
+  .p3 { background: linear-gradient(135deg, #0f2e1a 0%, #0a400f 100%); color: rgba(0,200,100,0.4); }
+  .p4 { background: linear-gradient(135deg, #2e1a0f 0%, #40200a 100%); color: rgba(250,160,0,0.4); }
+
+</style>
+</head>
+<body>
+
+<div class="hero-grid"></div>
+<div class="hero-glow"></div>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="#accueil" class="nav-logo">AI<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#profil">Profil</a></li>
+    <li><a href="#parcours">Parcours</a></li>
+    <li><a href="#competences">Compétences</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#projets">Projets</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="accueil">
+  <div class="hero-tag fade-in delay-1">Etudiant en Informatique · BTS SIO SLAM</div>
+  <h1 class="hero-name fade-in delay-2">
+    Alidis<br>
+    <span class="line2">IDI ISSILAMOU</span><span class="accent-word">.</span>
+  </h1>
+  <p class="hero-desc fade-in delay-3">
+    Passionné par les nouvelles technologies la création d'applications web et logicielles.
+  </p>
+  <div class="hero-ctas fade-in delay-4">
+    <a href="#projets" class="btn-primary">Voir mes projets →</a>
+    <a href="#contact" class="btn-ghost">Me contacter</a>
+  </div>
+  <div class="hero-stats fade-in delay-5">
+    <div>
+      <div class="stat-num">5</div>
+      <div class="stat-label">Projets réalisés</div>
+    </div>
+    <div>
+      <div class="stat-num">12+</div>
+      <div class="stat-label">Technologies</div>
+    </div>
+    <div>
+      <div class="stat-num">2</div>
+      <div class="stat-label">Stages en entreprise</div>
+    </div>
+    <div>
+      <div class="stat-num">1</div>
+      <div class="stat-label">Certification</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROFIL ─── -->
+<section id="profil">
+  <div class="section-header">
+    <div class="section-tag">01 / Profil</div>
+    <h2 class="section-title">Qui suis-je ?</h2>
+  </div>
+  <div class="profil-grid">
+    <div class="profil-text">
+      <p>Je suis étudiant en deuxième année de BTS Services Informatiques aux Organisations option SLAM. Passionné par les nouvelles technologie tel que l'informatique et souhaitant poursuivre mes études dans cette direction j’ai intégré le BTS SIO afin de pouvoir intégrer une école d'ingénieur.  </p>
+      <p>Mon objectif : intégrer un Bac+3 dans le développement fullstak, pour poursuivre dans un Master DevSecOps ou une école d'ingénieur. Je m'intéresse également aux problématiques de cybersécurité et à l'architecture logicielle.</p>
+      <div class="profil-highlight">
+        <p>🔍 Actuellement à la recherche d'une alternance — disponible à partir de septembre 2027, secteur de Paris.</p>
+      </div>
+    </div>
+    <div class="profil-info">
+      <div class="info-row">
+        <div class="info-icon">🎓</div>
+        <div>
+          <div class="info-label">Formation</div>
+          <div class="info-value">BTS SIO option SLAM</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">📍</div>
+        <div>
+          <div class="info-label">Localisation</div>
+          <div class="info-value">Nemours, île de france</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">💼</div>
+        <div>
+          <div class="info-label">Statut</div>
+          <div class="info-value">Disponible — Alternance 2027</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🌐</div>
+        <div>
+          <div class="info-label">Langues</div>
+          <div class="info-value">Français (natif) · Anglais (B2)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PARCOURS ─── -->
+<section id="parcours">
+  <div class="section-header">
+    <div class="section-tag">02 / Parcours</div>
+    <h2 class="section-title">Mon parcours</h2>
+  </div>
+
+  <div class="timeline-tabs">
+    <button class="tab-btn active" onclick="switchTab('scolaire', this)">Scolaire</button>
+    <button class="tab-btn" onclick="switchTab('pro', this)">Professionnel</button>
+  </div>
+
+  <div id="tab-scolaire" class="tab-panel active">
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">2025 — 2027</div>
+        <div class="timeline-role">BTS SIO — Option SLAM</div>
+        <div class="timeline-org">Lycée Louis Armand , Paris 15e — Île de France</div>
+        <div class="timeline-desc">BTS Services Informatiques aux Organisations, spécialité Solutions Logicielles et Applications Métiers. Formation en cours.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2023 — 2025</div>
+        <div class="timeline-role">Classe Préparatoire au Grande Ecole — Technologie et
+Sciences Industrielle</div>
+        <div class="timeline-org"> lycée Du Hainaut, Valenciennes — Haute france</div>
+        
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2023 — 2021</div>
+        <div class="timeline-role">BAC STI2D</div>
+        <div class="timeline-org"> Baccalauréat Sciences et Technologies de l’Industrie et du
+Développement Durable au Lycée Lafayette, Champagne-sur-Seine — Île de France</div>
+        <div class="timeline-desc">BAC STI2D. Options : Systèmes d’Information et du
+Numériques.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-pro" class="tab-panel">
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">2019/2020</div>
+        <div class="timeline-role">Stage AU SERVICE SUPPORT
+</div>
+        <div class="timeline-org">Paris Agglomération — Paris</div>
+        <div class="timeline-desc">Réalisation d’
+un stage à Enegie Paris chez Econocom m'a permis de découvrir le métier de technicien en informatique et
+gérer un parc informatique en gérant différent matériaux et
+préparer et mettant différent au broker les matériels obsolètes.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2018/2019</div>
+        <div class="timeline-role">Stage AU SERVICE DEVELLOPEMENT</div>
+        <div class="timeline-org">Réalisation d'
+un stage en informatique à la D.S.I.N(Direction
+des Systèmes d'Information et du Numérique) de la Mairie
+de Paris</div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COMPÉTENCES ─── -->
+<section id="competences">
+  <div class="section-header">
+    <div class="section-tag">03 / Compétences</div>
+    <h2 class="section-title">Mes compétences</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-card-title">Langages</div>
+      <div class="skill-tags">
+        <span class="skill-tag">HTML5</span>
+        <span class="skill-tag">CSS3</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">PHP</span>
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">C#</span>
+        <span class="skill-tag learning">Rust ✦</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Frameworks & Libs</div>
+      <div class="skill-tags">
+        <span class="skill-tag learning">React ✦</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Outils & Env.</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Git / GitHub</span>
+        <span class="skill-tag">VS Code</span>
+        <span class="skill-tag">IntelliJ</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Cybersécurité</div>
+      <div class="skill-tags">
+        <span class="skill-tag">RGPD</span>
+        <span class="skill-tag">E-BIOS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CERTIFICATIONS ─── -->
+<section id="certifications">
+  <div class="section-header">
+    <div class="section-tag">04 / Certifications</div>
+    <h2 class="section-title">Certifications</h2>
+  </div>
+  <div class="cert-grid">
+    <div class="cert-card">
+      <div class="cert-org">ANSSI</div>
+      <div class="cert-name">MOOC SecNumAcadémie</div>
+      <div class="cert-year">Obtenue en 2025</div>
+      <p style="font-size:0.85rem;color:var(--muted);line-height:1.7;">Formation complète en cybersécurité des systèmes d'information délivrée par l'Agence Nationale de Sécurité des Systèmes d'Information.</p>
+      <a href="#" class="cert-link">Voir le certificat →</a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-org">CNIL</div>
+      <div class="cert-name">Formation MOOC de la CNIL</div>
+      <div class="cert-year">Obtenue en 2026</div>
+      <p style="font-size:0.85rem;color:var(--muted);line-height:1.7;">Première certification de la spécialisation Google Cybersecurity sur Coursera. Couvre les fondamentaux de la sécurité informatique.</p>
+      <a href="#" class="cert-link">Voir le certificat →</a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-org">CLUBEBIOS</div>
+      <div class="cert-name">Formation MOOC du CLUBEBIOS</div>
+      <div class="cert-year">Obtenue en 2026</div>
+      <p style="font-size:0.85rem;color:var(--muted);line-height:1.7;">Première certification de la spécialisation Google Cybersecurity sur Coursera. Couvre les fondamentaux de la sécurité informatique.</p>
+      <a href="#" class="cert-link">Voir le certificat →</a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-org">Pix</div>
+      <div class="cert-name">Formation PIX</div>
+      <div class="cert-year">Obtenue en 2027</div>
+      <p style="font-size:0.85rem;color:var(--muted);line-height:1.7;">Première certification de la spécialisation Google Cybersecurity sur Coursera. Couvre les fondamentaux de la sécurité informatique.</p>
+      <a href="#" class="cert-link">Voir le certificat →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROJETS ─── -->
+<section id="projets">
+  <div class="section-header">
+    <div class="section-tag">05 / Projets</div>
+    <h2 class="section-title">Mes projets</h2>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-img">
+        <div class="proj-placeholder p1">E-Commerce</div>
+      </div>
+      <div class="project-body">
+        <div class="project-type">Projet scolaire</div>
+        <div class="project-name">TechShop</div>
+        <div class="project-desc">Site e-commerce statique avec panier, filtres produits et interface responsive. Entièrement réalisé en HTML, CSS et JavaScript vanilla.</div>
+        <div class="project-stack">
+          <span class="stack-chip">HTML</span>
+          <span class="stack-chip">CSS</span>
+          <span class="stack-chip">JavaScript</span>
+        </div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-img">
+        <div class="proj-placeholder p2">Portfolio</div>
+      </div>
+      <div class="project-body">
+        <div class="project-type">Projet personnel</div>
+        <div class="project-name">Portfolio v2</div>
+        <div class="project-desc">Portfolio personnel développé en PHP avec un système de routing maison, gestion des projets via JSON et thème dynamique.</div>
+        <div class="project-stack">
+          <span class="stack-chip">PHP</span>
+          <span class="stack-chip">CSS</span>
+          <span class="stack-chip">JSON</span>
+        </div>
+       </div>
+    </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <div class="section-header">
+    <div class="section-tag">06 / Contact</div>
+    <h2 class="section-title">Me contacter</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <a href="mailto:alidis.idiissilamou@email.fr" class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <div class="contact-sub">Email</div>
+          <div class="contact-text">alidis.idiissilamou@email.fr</div>
+        </div>
+      </a>
+      <a href="https://github.com" class="contact-item">
+        <div class="contact-icon">⌨️</div>
+        <div>
+          <div class="contact-sub">GitHub</div>
+          <div class="contact-text">github.com/alidisidiissilamou</div>
+        </div>
+      </a>
+      <a href="https://linkedin.com" class="contact-item">
+        <div class="contact-icon">💼</div>
+        <div>
+          <div class="contact-sub">LinkedIn</div>
+          <div class="contact-text">linkedin/in/alidis-idi-issilamou</div>
+        </div>
+      </a>
+      <div class="contact-item" style="cursor:default;">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-sub">Localisation</div>
+          <div class="contact-text">Nemours, Île de france — France</div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <div class="form-group">
+        <label>Votre nom</label>
+        <input type="text" placeholder="Jean Dupont">
+      </div>
+      <div class="form-group">
+        <label>Votre email</label>
+        <input type="email" placeholder="jean@example.com">
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Bonjour, je suis intéressé par votre profil pour..."></textarea>
+      </div>
+      <button class="btn-primary" style="align-self:flex-start;" onclick="this.textContent='Message envoyé ✓'; this.style.background='#00e5c8'">Envoyer →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-copy">© 2026 Alex Moreau · Conçu avec soin</div>
+  <div class="footer-links">
+    <a href="#">Mentions légales</a>
+    <a href="#accueil">Retour en haut ↑</a>
+  </div>
+</footer>
+
+<script>
+function switchTab(tab, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  btn.classList.add('active');
+}
+
+// Intersection observer for scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.skill-card, .project-card, .cert-card, .timeline-item, .info-row, .contact-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(24px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
